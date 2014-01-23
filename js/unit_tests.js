@@ -1,6 +1,6 @@
 
 
-test ( "accessing cells", function() {
+test ( "accessing cells on a 10x10 board", function() {
     var life = Life({
         xmax:10, // Sets the max x length
         ymax:10, // Sets the max y length
@@ -32,9 +32,26 @@ test ( "accessing cells", function() {
     ok ( -1 == life.bottom_right_cell(9));
     ok ( -1 == life.bottom_right_cell(95));
     ok ( 11 == life.bottom_right_cell(0));
+
 });
 
-test ( "gives correct neighbor count", function() {
+test ( "Accessing cells on a 6x5 board", function() {
+    var life = new Life({
+        xmax:6,
+        ymax:5,
+        initia: "zeros"
+    });
+
+    ok (3 == life.top_cell(9));
+    ok (4 == life.top_right_cell(9));
+    ok (8 == life.left_cell(9));
+    ok (10 == life.right_cell(9));
+    ok (14 == life.bottom_left_cell(9));
+    ok (15 == life.bottom_cell(9));
+    ok (16 == life.bottom_right_cell(9));
+});
+
+test ( "Counting of neighboring cells", function() {
     var life = new Life({
         xmax:10, // Sets the max x length
         ymax:10, // Sets the max y length
@@ -69,8 +86,7 @@ test ( "gives correct neighbor count", function() {
     ok (counter[21] == 1);
 });
 
-test ( "test a full run with 3 top neighboring cells on", function() {
-    var life = new Life({
+test ( "test a full run with 3 top neighboring cells on", function() { var life = new Life({
         xmax:10, // Sets the max x length
         ymax:10, // Sets the max y length
         initial: "zeros", // Starting values, "zeros", "ones", "random"
@@ -89,6 +105,40 @@ test ( "test a full run with 3 top neighboring cells on", function() {
     ok (undefined == life.get(13));
     ok (undefined == life.get(10));
     ok (undefined == life.get(14));
+});
+
+test ( "Static beehive pattern", function() {
+    var life = new Life({
+        xmax: 6,
+        ymax:5,
+        initial: "zeros"
+    });
+
+    console.log("Running behive");
+    life.set(8);
+    life.set(9);
+    life.set(13);
+    life.set(16);
+    life.set(20);
+    life.set(21);
+    console.log(life.get_board());
+    life.run();
+    ok (1 == life.get(8));
+    ok (1 == life.get(9));
+    ok (1 == life.get(13));
+    ok (1 == life.get(16));
+    ok (1 == life.get(20));
+    ok (1 == life.get(21));
+    console.log(life.get_board());
+    life.run();
+    ok (1 == life.get(8));
+    ok (1 == life.get(9));
+    ok (1 == life.get(13));
+    ok (1 == life.get(16));
+    ok (1 == life.get(20));
+    ok (1 == life.get(21));
+    console.log(life.get_board());
+    console.log("Behive done");
 });
 
 test ( "The blinker pattern", function() {
