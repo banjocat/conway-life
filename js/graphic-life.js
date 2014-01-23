@@ -3,8 +3,8 @@
 var stage = new PIXI.Stage(0x66FF99);
 var graphics = new PIXI.Graphics();
 var box_size = 10;
-var XMAX = 40;
-var YMAX = 25;
+var XMAX = 30;
+var YMAX = 30;
 var BOX_COLOR = 0x222222;
 var BACKGROUND_COLOR = 0x66FF99;
 var WIDTH = box_size * XMAX;

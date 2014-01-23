@@ -257,12 +257,17 @@ function Life(_options)
     // Runs life for one iteration
     this.run = function(_settings)
     {
+        var start_time = new Date();
         this.run_counter();
         current_board = new_board;
         current_values_with_ones = new_values_with_ones;
         new_values_with_ones = [];
         new_board = [];
         new_board.length = options.xmax * options.ymax;
+        console.log(
+                'Life ran in', 
+                new Date() - start_time,
+                'ms');
     }
 
     return this;
