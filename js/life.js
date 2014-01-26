@@ -222,10 +222,9 @@ function Life(_options)
                             var arg = convert_to_2d(i);
                             options.on_life(arg[0], arg[1]);
                         }
-
                         new_values_with_ones.push(i);
                     }
-            else if (counter[i] === 3) {
+            else if (counter[i] === 3 && new_board[i] !== 1) {
                 new_board[i] = 1;
                 if (options.on_life) {
                     var arg = convert_to_2d(i);
@@ -233,7 +232,7 @@ function Life(_options)
                 }
                 new_values_with_ones.push(i);
             }
-            else if (counter[i] > 3) {
+            else if (counter[i] > 3 && new_board[i]) {
                 new_board[i] = undefined;
                 new_values_with_ones =
                     _.without(new_values_with_ones, i);

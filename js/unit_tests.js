@@ -114,14 +114,12 @@ test ( "Static beehive pattern", function() {
         initial: "zeros"
     });
 
-    console.log("Running behive");
     life.set(8);
     life.set(9);
     life.set(13);
     life.set(16);
     life.set(20);
     life.set(21);
-    console.log(life.get_board());
     life.run();
     ok (1 == life.get(8));
     ok (1 == life.get(9));
@@ -129,7 +127,6 @@ test ( "Static beehive pattern", function() {
     ok (1 == life.get(16));
     ok (1 == life.get(20));
     ok (1 == life.get(21));
-    console.log(life.get_board());
     life.run();
     ok (1 == life.get(8));
     ok (1 == life.get(9));
@@ -137,10 +134,39 @@ test ( "Static beehive pattern", function() {
     ok (1 == life.get(16));
     ok (1 == life.get(20));
     ok (1 == life.get(21));
-    console.log(life.get_board());
-    console.log("Behive done");
 });
 
+test ( "Static block patteron", function() {
+    var life = new Life({
+        xmax:4,
+        ymax:4,
+        initial: "zeros"
+    });
+
+    console.log("start of block pattern");
+    life.set(5);
+    life.set(6);
+    life.set(9);
+    life.set(10);
+    ok (1 == life.get(5));
+    ok (1 == life.get(6));
+    ok (1 == life.get(9));
+    ok (1 == life.get(10));
+    console.log(life.get_board());
+    life.run();
+    ok (1 == life.get(5));
+    ok (1 == life.get(6));
+    ok (1 == life.get(9));
+    ok (1 == life.get(10));
+    console.log(life.get_board());
+    life.run();
+    console.log(life.get_board());
+    ok (1 == life.get(5));
+    ok (1 == life.get(6));
+    ok (1 == life.get(9));
+    ok (1 == life.get(10));
+    console.log("end of block pattern");
+});
 test ( "The blinker pattern", function() {
     var life = new Life({
         xmax:5,

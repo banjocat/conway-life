@@ -10,17 +10,20 @@
 <body>
 <div id='life'>
 </div>
+<div id='anotherlife'>
+</div>
 <script src='/js/graphic-life.js'></script>
 
 <script>
-/*
-$('#life').Life({
-        box-size:100,
-        xmax:10,
-        ymax:10,
-        initial: 'random',
+$(document).ready(function() {
+        var life = $('#life').Life({
+box_size:10,
+xmax:50,
+ymax:50,
+initial: 'random',
 });
-*/
+life.run();
+});
 </script>
 </body>
 </html>

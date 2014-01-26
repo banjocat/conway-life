@@ -1,0 +1,27 @@
+This is a Conway Life Demo written as a Jquery plugin.
+
+A simple example would be done like below
+var = life $('selector').life({
+    xmax:25,
+    ymax:25,
+    box_size:10,
+    initial:'random',
+});
+life.run();
+
+
+This is done completly client side.
+While for small amount of users server side would be quicker,
+but having a hundread people running this would make the server
+have a difficult time keeping up.  If storage was not an issue,
+a server could store set patterns to make computation quicker.
+
+This is broken up into two files.  One called life.js is the logic
+of the game itself.  The other graphic-life.js uses life.js to display
+the graphics. pixi.js was used for the graphical engine. It uses WebGL and
+I found it more than quick enough to handle what I was throwing at it.
+
+Other libraries I used are, jquery and underscore.js. I use underscore.js
+a lot in my projects I find the utility functions very helpful.
+
+
