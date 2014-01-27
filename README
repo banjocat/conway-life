@@ -18,10 +18,22 @@ but having a hundread people running this would make the server
 have a difficult time keeping up.  If storage was not an issue,
 a server could store set patterns to make computation quicker.
 
-This is broken up into two files.  One called life.js is the logic
-of the game itself.  The other graphic-life.js uses life.js to display
-the graphics. pixi.js was used for the graphical engine. It uses WebGL and
-I found it more than quick enough to handle what I was throwing at it.
+This is broken up into two files.
+life.js
+Contains the algorithm and is designed to work seperate from
+the graphical part. The algorithm used is very simple. I do
+not claim it to be the quickest Life algorithm but it was easy
+to implement and debug. It keeps track of all the cells that
+are currently alive and only runs the algorithm on them.
+It has O(n) complexity where n is the number of cells currently alive.
+Its average case and worst case are the same.  Because cells are always
+depleting on large boards it will start to pick up speed as the game
+progresses.
+
+graphic-life.js
+Contains the graphic portion of the app. I used pixi.js for the
+graphic engine, I found it more than quick enough to handle what
+I threw at it. It uses WebGL to render quickly. 
 
 Other libraries I used are, jquery and underscore.js. I use underscore.js
 a lot in my projects I find the utility functions very helpful.

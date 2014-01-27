@@ -192,6 +192,8 @@ function Life(_options)
     this.run_counter = function()
     {
         counter = [];
+        // THis is the O(n) complexity where
+        // n is the number of live cells
         for (var i = 0; 
                 i < current_values_with_ones.length;
                 i += 1) {
@@ -261,6 +263,7 @@ function Life(_options)
     this.run = function(_settings)
     {
         var start_time = new Date();
+        // This is the main function call for the alogrithm
         this.run_counter();
         current_board = new_board;
         current_values_with_ones = new_values_with_ones;
