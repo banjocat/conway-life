@@ -15,9 +15,7 @@
         // Private variables
         var stage = new PIXI.Stage(options.background_color);
         var graphics = new PIXI.Graphics();
-        var algorithm_running = false;
         var fps_counter = 0;
-        var stop = true;
         var WIDTH = options.box_size * options.xmax;
         var HEIGHT = options.box_size * options.ymax;
         var renderer = new PIXI.autoDetectRenderer(WIDTH, HEIGHT);
@@ -72,28 +70,41 @@
             life.run();
             algorithm_running = false;
         });
+        
+        // Made an event to disable any race conditions possibilities
+        // Only one event will fire at a time
+        $(renderer.view).on("restart", function() {
+            graphics.clear();
+            initialize();
+        });
+        
+        $(renderer.view).on("draw_life", function() {
+            renderer.render(stage);
+            graphics.clear();
+            fps_counter = 0;
+        });
 
+        // requestAnimFrame tries to get 60 fps 
+        // But this will depend on everything
+        // This makes the goal based on what I have 15 lifes per second
+        // Events are used to attempt to make browsers treat the main loop
+        // and drawing/caculation as two seperate threads... though this depends
+        // on which browser is used. It may do nothing if just one thread is used.
+        // Events at least will prevent any race conditions from happening
         var animate = function()
         {
             fps_counter += 1;
             if (fps_counter === 2) {
-                algorithm_running = true;
                 $(renderer.view).trigger("run_life");
             }
             else if (fps_counter === 4) {
-                // Just incase its not done yet
-                // Wait till it is finished
-                while (algorithm_running) ;
-                renderer.render(stage);
-                graphics.clear();
-                fps_counter = 0;
+                $(renderer.view).trigger("draw_life");
             } 
             requestAnimFrame(animate);
         }
 
         this.restart = function() {
-            graphics.clear();
-            initialize();
+            $(renderer.view).trigger("restart");
         }
 
         initialize();
@@ -101,6 +112,7 @@
         return this;
     }
 
+    // Jquery plugin creation
     $.fn.Life = function(options) {
         var life = new GraphicLife(this, options);
         return life;
