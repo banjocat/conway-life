@@ -1,5 +1,4 @@
 
-
 /*
  * Simple Algorithm
  * Start at 0,0
@@ -29,12 +28,12 @@ function Life(_options)
     var options = {
         xmax:undefined, // x length required
         ymax:undefined, // y length required
-        initial: 'random', // initial values "zeros" "ones" "random"
+        initial: 'random', // initial values "zeros" "random"
         random_chance_of_life: 25, // When initial random is chosen this is the chance of it being a 1
         // Callback for when the new board has life given takes (x ,y)
         on_life: undefined,
         // Callback for when a new board gets overpopulated and is not switched back to off
-        // Values that never get switched on are never checked and should be assuemd dead
+        // Values that never get switched on are never checked and should be assumed dead
         on_death: undefined, 
     };
     _.extend(options, _options);
@@ -47,7 +46,7 @@ function Life(_options)
         return false;
     }
 
-    // variables
+    // Private variables
     var 
         // the current board
         current_board = [],         
@@ -62,6 +61,7 @@ function Life(_options)
 
     // Takes an index 
     // returns an array of its x and y values
+    // This is used since most graphic based APIs want x and y values
     var convert_to_2d = function(index) {
         var val = [];
         val.push(index % options.xmax);
@@ -76,6 +76,7 @@ function Life(_options)
     {
         current_board[index] = 1;
         current_values_with_ones.push(index);
+        // Runs the call back if it exists if a graphical end is attached
         if (options.on_life) {
             var arg = convert_to_2d(index);
             options.on_life(arg[0], arg[1]);
@@ -86,11 +87,13 @@ function Life(_options)
         current_board[index] = 0;
         current_values_with_ones = _.without(
                 current_values_with_ones, index);
+        // Runs the callback if it exists if a graphics are attached
         if (options.on_death) {
             var arg = convert_to_2d(index);
             options.on_death(arg[0], arg[1]);
         }
     }
+    // Probably only needed for debugging
     this.get = function(index)
     {
         return current_board[index];
@@ -106,6 +109,7 @@ function Life(_options)
     }
 
     // Functions for getting the index of neighboring cells
+    // Returns -1 if it would be invalid
     this.left_cell = function(cell)
     {
         if (cell < 0 || cell % options.xmax == 0)
