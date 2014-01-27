@@ -63,16 +63,12 @@
         };
         
 
-        // Events are used to make run not affect the fps
-        // It still will if it takes too long to run on
-        // very large boards
+        // Events that are called during the animation sequence
         $(renderer.view).on("run_life", function() {
+            // Runs the life algorithm one time
             life.run();
-            algorithm_running = false;
         });
-        
-        // Made an event to disable any race conditions possibilities
-        // Only one event will fire at a time
+    
         $(renderer.view).on("restart", function() {
             graphics.clear();
             initialize();
@@ -94,7 +90,12 @@
         var animate = function()
         {
             fps_counter += 1;
-            if (fps_counter === 2) {
+            // running life is done before drawining
+            // This is to try to give the life algorithim
+            // a little more time before it has to be drawn.
+            // If it takes too long drawing will still have to wait
+            // for the life algorithm to finish
+            if (fps_counter === 1) {
                 $(renderer.view).trigger("run_life");
             }
             else if (fps_counter === 4) {
