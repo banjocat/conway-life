@@ -17,7 +17,7 @@
         var graphics = new PIXI.Graphics();
         var algorithm_running = false;
         var fps_counter = 0;
-        var stop = false;
+        var stop = true;
         var WIDTH = options.box_size * options.xmax;
         var HEIGHT = options.box_size * options.ymax;
         var renderer = new PIXI.autoDetectRenderer(WIDTH, HEIGHT);
@@ -33,7 +33,10 @@
             else
                 return options.box_color;
         }
-        var life = new Life({
+        var life = {};
+
+        var initialize = function() {
+            life = new Life({
             xmax: options.xmax,
             ymax: options.ymax,
             initial: options.initial,
@@ -57,6 +60,10 @@
             },
             random_chance_of_life: 30,
         });
+        renderer.render(stage);
+        graphics.clear();
+        };
+        
 
         // Events are used to make run not affect the fps
         // It still will if it takes too long to run on
@@ -68,8 +75,6 @@
 
         var animate = function()
         {
-            if (stop)
-                return;
             fps_counter += 1;
             if (fps_counter === 2) {
                 algorithm_running = true;
@@ -83,26 +88,16 @@
                 graphics.clear();
                 fps_counter = 0;
             } 
-
             requestAnimFrame(animate);
         }
 
-        this.run = function() {
-            stop = false;
-            requestAnimFrame(animate);
-        }
         this.restart = function() {
-            
+            graphics.clear();
+            initialize();
         }
-        this.stop = function() {
-            stop = true; 
-        }
-        this.set = function(i) {
-            life.set(i);
-        }
-        this.unset = function(i) {
-            life.unset(i);
-        }
+
+        initialize();
+        requestAnimFrame(animate);
         return this;
     }
 

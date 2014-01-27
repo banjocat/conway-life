@@ -5,9 +5,11 @@ var = life $('selector').life({
     xmax:25,
     ymax:25,
     box_size:10,
-    initial:'random',
 });
-life.run();
+
+To restart it, only works correctly with initial: 'random'
+life.restart();
+
 
 
 This is done completly client side.
@@ -25,3 +27,11 @@ Other libraries I used are, jquery and underscore.js. I use underscore.js
 a lot in my projects I find the utility functions very helpful.
 
 
+THINGS THAT COULD OF BEEN
+The code is setup for setting cells to specific values to start.
+Which is done in the unit_tests but I had issues working with pixi.js.
+I decided to have it at a working state right now over fixing something
+that was not part of the project.
+
+I did add restart so that refershing the page is not required to have
+it run again.

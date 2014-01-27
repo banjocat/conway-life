@@ -6,23 +6,27 @@
 <script src='/js/underscore-min.js'></script>
 <script src='/js/life.js'></script>
 <script src='/js/pixi.js'></script>
+<script src='/js/graphic-life.js'></script>
 </head>
 <body>
 <div id='life'>
 </div>
-<div id='anotherlife'>
-</div>
-<script src='/js/graphic-life.js'></script>
+<button id='restart'>
+    Restart
+</button>
 
 <script>
 $(document).ready(function() {
+
         var life = $('#life').Life({
-box_size:10,
-xmax:50,
-ymax:50,
-initial: 'random',
-});
-life.run();
+            box_size:10,
+            xmax:50,
+            ymax:50,
+        });
+
+        $('#restart').click(function() {
+            life.restart();
+        });
 });
 </script>
 </body>
