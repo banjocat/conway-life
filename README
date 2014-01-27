@@ -13,7 +13,7 @@ life.restart();
 
 
 This is done completly client side.
-While for small amount of users server side would be quicker,
+For small amount of users server side would be quicker,
 but having a hundread people running this would make the server
 have a difficult time keeping up.  If storage was not an issue,
 a server could store set patterns to make computation quicker.
@@ -26,6 +26,10 @@ I found it more than quick enough to handle what I was throwing at it.
 Other libraries I used are, jquery and underscore.js. I use underscore.js
 a lot in my projects I find the utility functions very helpful.
 
+
+There are unit_tests which if the project is checked out can be run going
+to the test.html. The actual javascript containing the tests is located in the
+js directory. I always try to write unit tests I think it helps a lot with design.
 
 THINGS THAT COULD OF BEEN
 The code is setup for setting cells to specific values to start.
