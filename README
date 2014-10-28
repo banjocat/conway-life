@@ -1,5 +1,7 @@
 This is a Conway Life Demo written as a Jquery plugin.
 
+Currently it only supports square shaped boards.
+
 A simple example would be done like below
 var = life $('selector').life({
     xmax:25,
