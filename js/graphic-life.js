@@ -83,10 +83,6 @@
         // requestAnimFrame tries to get 60 fps 
         // But this will depend on other factors if it achieves this
         // This makes the goal based on what I have 15 lifes per second
-        // Events are used to attempt to make browsers treat the main loop
-        // and drawing/caculation as two seperate threads... though this depends
-        // on which browser is used. It may do nothing if just one thread is used.
-        // Events at least will prevent any race conditions from happening
         var animate = function()
         {
             fps_counter += 1;
